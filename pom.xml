@@ -77,5 +77,7 @@
     <module>springcloud-api-gateway</module>
     <module>springcloud-config-server</module>
     <module>springcloud-config-client</module>
+    <module>springcloud-config-eureka-server</module>
+    <module>springcloud-config-eureka-client</module>
   </modules>
 </project>

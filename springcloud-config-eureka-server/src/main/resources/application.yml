@@ -1,0 +1,30 @@
+server:
+  port: 6002
+  
+spring:
+  application:
+    name: springcloud-config-eureka-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/ejshi/springcloud-config--demo/
+          search-paths: config-repo
+          username: xxx
+          password: xxx
+          
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url: 
+      #单机配置defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+      
+  instance:
+    instance-id: ${spring.application.name}-${server.port}
+    prefer-ip-address: true     #访问路径可以显示IP地址
+
+info:
+  app.name: $project.name$
+  company.name: www.sjz.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
