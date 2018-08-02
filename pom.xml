@@ -75,5 +75,7 @@
 	    <module>springcloud-provider-8003</module>
 	    <module>springcloud-consumer</module>
     <module>springcloud-api-gateway</module>
+    <module>springcloud-config-server</module>
+    <module>springcloud-config-client</module>
   </modules>
 </project>

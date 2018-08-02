@@ -1,0 +1,46 @@
+访问配置信息的URL与配置文件的映射关系如下：
+
+/{application}/{profile} [/{label}]
+/{application}-{profile}.yml
+/{label}/{application}-{profile}.yml
+/{application}-{profile}.properties
+/{label}/{appliction}-{profile}.properties
+上面的url会映射{application}-{profile}.properties对应的配置文件，其中{label}对应Git上不同的分支，默认是master。
+
+通过浏览器访问http://localhost:6001/sam/dev/master,结果如下：
+{
+	name: "sam",
+	profiles: [
+		"test"
+	],
+	label: "master",
+	version: null,
+	state: null,
+	propertySources: [
+		{
+			name: "https://github.com/ejshi/springcloud-config--demo/sam-config/sam-test.properties",
+			source: {
+				from: "git-test-1.0"
+			}
+		},
+		{
+			name: "https://github.com/ejshi/springcloud-config--demo/sam-config/sam.properties",
+			source: {
+				from: "git-1.0"
+			}
+		}
+	]
+}
+
+
+Spring Cloud Config配置中心的工作原理如下：
+
+客户端启动时，根据bootstrap.properties（不能是application.properties）中配置的应用名{application}、环境名{profile}、分支名{label}，向Config Server请求获取配置信息。
+Config Server根据自己维护的Git仓库信息和客户传递过来的配置定位信息去查找配置信息。
+通过git clone命令将找到的配置信息下载到本地（Config Server的文件系统中）。在通过页面访问或启动客户端的时候，我们在服务端能看到如下下载的log：
+
+2018-05-14 22:51:58.055  INFO 3084 --- [nio-7001-exec-1] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: file:/C:/Users/sam/AppData/Local/Temp/config-repo-8627749771720918793/spring-cloud-config-file/sam-dev.properties
+2018-05-14 22:51:58.055  INFO 3084 --- [nio-7001-exec-1] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: file:/C:/Users/sam/AppData/Local/Temp/config-repo-8627749771720918793/spring-cloud-config-file/sam.properties
+
+Config Server创建Spring 的ApplicationContext实例，并从Git本地仓库中加载配置文件，最后将这些配置内容读取出来返回给客户端。
+客户端在获取外部配置信息后加载到客户端的applicationContext实例。
