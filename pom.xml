@@ -79,5 +79,7 @@
     <module>springcloud-config-client</module>
     <module>springcloud-config-eureka-server</module>
     <module>springcloud-config-eureka-client</module>
+    <module>springcloud-server-zipkin</module>
+    <module>springcloud-client-zipkin</module>
   </modules>
 </project>

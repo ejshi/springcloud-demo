@@ -44,3 +44,8 @@ Config Server根据自己维护的Git仓库信息和客户传递过来的配置�
 
 Config Server创建Spring 的ApplicationContext实例，并从Git本地仓库中加载配置文件，最后将这些配置内容读取出来返回给客户端。
 客户端在获取外部配置信息后加载到客户端的applicationContext实例。
+
+
+bootstrap.yml 文件中的内容不能放到 application.yml 中，否则
+config部分无法被加载，因为config部分的配置先于 application.yml 被加
+载，而 bootstrap.yml 中的配置会先于 application.yml

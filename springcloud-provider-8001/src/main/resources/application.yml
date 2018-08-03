@@ -10,6 +10,8 @@ mybatis:
 spring:
    application:
     name: springcloud-provider
+   zipkin:
+    base-url: http://localhost:4200
    datasource:
     type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
     driver-class-name: org.gjt.mm.mysql.Driver              # mysql驱动包

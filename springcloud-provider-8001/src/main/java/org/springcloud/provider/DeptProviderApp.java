@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DeptProviderApp {
 
     public static void main( String[] args ){
-    	System.out.println("======== DeptProviderApp start begin =======");
     	SpringApplication.run(DeptProviderApp.class, args);
     	System.out.println("======== DeptProviderApp start success =======");
     }
